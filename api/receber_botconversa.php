@@ -16,11 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Prepare a consulta para inserir os dados na tabela
     $query = "INSERT INTO tickets (ticket, data, email, caso, status) VALUES ($1, $2, $3, $4, $5)";
 
-    // Atualize a URL de conexão do PostgreSQL com o Endpoint ID
-    $host = "ep-frosty-union-26727263-pooler.us-east-1.postgres.vercel-storage.com";
-    
     // Conecte ao banco de dados
-    $pgsql_conn = pg_connect("host=$host port=5432 dbname=verceldb user=default password=UMFsvA7JpZy9 sslmode=require");
+    $pgsql_conn = pg_connect("host=$endpoint.us-east-1.postgres.vercel-storage.com port=5432 dbname=verceldb user=default password=UMFsvA7JpZy9 sslmode=require");
 
     if (!$pgsql_conn) {
         die('Erro na conexão com o banco de dados: ' . pg_last_error());
