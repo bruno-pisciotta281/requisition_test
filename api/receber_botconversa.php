@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>teste</h1>
-</body>
-</html>
-
 <?php
 include 'conn.php'; // Inclua o arquivo de conexão
 
 // Verifique se a requisição é do tipo POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Recupere o Endpoint ID da URL de requisição
+    $endpoint = $_GET['endpoint'];
+
     // Dados de exemplo
     $ticket = '108105990';
     $data = '2023-07-20';
@@ -24,6 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Prepare a consulta para inserir os dados na tabela
     $query = "INSERT INTO tickets (ticket, data, email, caso, status) VALUES ($1, $2, $3, $4, $5)";
+
+    // Atualize a URL de conexão do PostgreSQL com o Endpoint ID
+    $host = "ep-frosty-union-26727263-pooler.us-east-1.postgres.vercel-storage.com";
+    
+    // Conecte ao banco de dados
+    $pgsql_conn = pg_connect("host=$host port=5432 dbname=verceldb user=default password=UMFsvA7JpZy9 sslmode=require");
+
+    if (!$pgsql_conn) {
+        die('Erro na conexão com o banco de dados: ' . pg_last_error());
+    }
 
     // Execute a consulta
     $result = pg_query_params($pgsql_conn, $query, array($ticket, $data, $email, $caso, $status));
