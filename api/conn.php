@@ -1,6 +1,5 @@
 <?php
-$host = 'ep-frosty-union-26727263-pooler.us-east-1.postgres.vercel-storage.com?options=endpoint%3Dep-frosty-union-26727263-pooler';
-// Substitua <endpoint-id> pelo seu ID de ponto de extremidade
+$host = 'ep-frosty-union-26727263-pooler.us-east-1.postgres.vercel-storage.com'; // Apenas o host, sem parâmetros
 $port = '5432'; // Porta padrão do PostgreSQL
 $dbname = 'verceldb'; // Nome do seu banco de dados
 $user = 'default'; // Nome de usuário do banco de dados
